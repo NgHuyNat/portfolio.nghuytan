@@ -16,6 +16,19 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/archlinux.svg">
 
         <title>Portfolio | HyNat</title>
+        
+        <!-- Dark Theme Script - Load immediately to prevent flash -->
+        <script>
+            // Immediately check and apply saved theme
+            (function() {
+                const savedTheme = localStorage.getItem('selected-theme');
+                const savedIcon = localStorage.getItem('selected-icon');
+                
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-theme');
+                }
+            })();
+        </script>
     </head>
     <body>
         <!--===== HEADER =====-->

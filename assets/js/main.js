@@ -12,34 +12,43 @@ const showMenu = (toggleId, navId) =>{
 showMenu('nav-toggle','nav-menu')
 
 /*==================== DARK LIGHT THEME ====================*/ 
-const themeButton = document.getElementById('theme-button')
-const themeIcon = document.getElementById('theme-icon')
-const darkTheme = 'dark-theme'
-const iconTheme = 'bx-sun'
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const themeButton = document.getElementById('theme-button')
+    const themeIcon = document.getElementById('theme-icon')
+    const darkTheme = 'dark-theme'
+    const iconTheme = 'bx-sun'
 
-// Previously selected theme (if user selected)
-const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
+    // Check if elements exist
+    if (!themeButton || !themeIcon) {
+        console.warn('Theme elements not found')
+        return
+    }
 
-// We obtain the current theme that the interface has by validating the dark-theme class
-const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeIcon.classList.contains(iconTheme) ? 'bx-moon' : 'bx-sun'
+    // Previously selected theme (if user selected)
+    const selectedTheme = localStorage.getItem('selected-theme')
+    const selectedIcon = localStorage.getItem('selected-icon')
 
-// We validate if the user previously chose a theme
-if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark theme
-  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
-  themeIcon.classList[selectedIcon === 'bx-moon' ? 'add' : 'remove'](iconTheme)
-}
+    // We obtain the current theme that the interface has by validating the dark-theme class
+    const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
+    const getCurrentIcon = () => themeIcon.classList.contains(iconTheme) ? 'bx-moon' : 'bx-sun'
 
-// Activate / deactivate the theme manually with the button
-themeButton.addEventListener('click', () => {
-    // Add or remove the dark / icon theme
-    document.body.classList.toggle(darkTheme)
-    themeIcon.classList.toggle(iconTheme)
-    // We save the theme and the current icon that the user chose
-    localStorage.setItem('selected-theme', getCurrentTheme())
-    localStorage.setItem('selected-icon', getCurrentIcon())
+    // We validate if the user previously chose a theme
+    if (selectedTheme) {
+        // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark theme
+        document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
+        themeIcon.classList[selectedIcon === 'bx-moon' ? 'add' : 'remove'](iconTheme)
+    }
+
+    // Activate / deactivate the theme manually with the button
+    themeButton.addEventListener('click', () => {
+        // Add or remove the dark / icon theme
+        document.body.classList.toggle(darkTheme)
+        themeIcon.classList.toggle(iconTheme)
+        // We save the theme and the current icon that the user chose
+        localStorage.setItem('selected-theme', getCurrentTheme())
+        localStorage.setItem('selected-icon', getCurrentIcon())
+    })
 })
 
 /*==================== REMOVE MENU MOBILE ====================*/
